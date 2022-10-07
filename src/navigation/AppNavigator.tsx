@@ -3,9 +3,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Home, Actions, Settings, Portfolio, Prices } from "../screens";
+import { Home, Actions, Settings, Portfolio, Prices, News } from "../screens";
 
 import TabBar from "../components/TabBar";
+
+const HomeStackNavigator = createNativeStackNavigator();
+
+const HomeNavigator = () => {
+  return (
+    <HomeStackNavigator.Navigator>
+      <HomeStackNavigator.Screen name="Home" component={Home} />
+      <HomeStackNavigator.Screen name="News" component={News} />
+    </HomeStackNavigator.Navigator>
+  );
+};
 
 const TabBarNavigator = createBottomTabNavigator();
 
