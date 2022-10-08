@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,32 @@ import {
 import Colors from "../constants/Colors";
 import CoinbaseButton from "../components/CoinbaseButton";
 
+import { WatchlistState } from "../store/reducers/watchlist";
+import { useSelector, useDispatch } from "react-redux";
+import * as watchlistActions from "../store/actions/watchlist";
+
+import WatchlistItem from "../components/WatchlistItem";
+import Watchlist from "../components/Watchlist";
+
+interface RootState {
+  watchlist: WatchlistState;
+}
 const Home = () => {
+  const watchlistData = useSelector((state: RootState) => state.watchlist);
+
+  const dispatch = useDispatch();
+  const loadData = () => {
+    try {
+      dispatch(watchlistActions.fetchCoinData());
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -21,6 +46,7 @@ const Home = () => {
         <Text style={styles.title}>Welcome to Coinbase!</Text>
         <Text style={styles.subTitle}>Make your first investment today</Text>
         <CoinbaseButton title="Get started" />
+        <Watchlist coinData={watchlistData.watchlistData} />
       </ScrollView>
     </SafeAreaView>
   );
