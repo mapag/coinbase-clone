@@ -11,8 +11,12 @@ import Colors from "../constants/Colors";
 import CoinbaseButton from "../components/CoinbaseButton";
 
 import { WatchlistState } from "../store/reducers/watchlist";
+import { TopMoversState } from "../store/reducers/topmovers";
+
 import { useSelector, useDispatch } from "react-redux";
+
 import * as watchlistActions from "../store/actions/watchlist";
+import * as topmoversActions from "../store/actions/topmovers";
 
 import WatchlistItem from "../components/WatchlistItem";
 import Watchlist from "../components/Watchlist";
@@ -20,14 +24,21 @@ import { AnyAction } from "redux";
 
 interface RootState {
   watchlist: WatchlistState;
+  topmovers: TopMoversState;
 }
+
 const Home = () => {
   const watchlistData = useSelector((state: RootState) => state.watchlist);
+
+  const topmoversData = useSelector((state: RootState) => state.topmovers);
+
+  console.log(JSON.stringify(topmoversData));
 
   const dispatch = useDispatch();
   const loadData = () => {
     try {
       dispatch(watchlistActions.fetchCoinData() as unknown as AnyAction);
+      dispatch(topmoversActions.fetchTopMoversData() as unknown as AnyAction);
     } catch (err) {
       throw err;
     }
