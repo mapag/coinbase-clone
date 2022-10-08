@@ -21,6 +21,8 @@ import * as topmoversActions from "../store/actions/topmovers";
 import WatchlistItem from "../components/WatchlistItem";
 import Watchlist from "../components/Watchlist";
 import { AnyAction } from "redux";
+import TopMoversListItem from "../components/TopMoversListItem";
+import TopMoversList from "../components/TopMoversList";
 
 interface RootState {
   watchlist: WatchlistState;
@@ -59,6 +61,7 @@ const Home = () => {
         <Text style={styles.subTitle}>Make your first investment today</Text>
         <CoinbaseButton title="Get started" />
         <Watchlist coinData={watchlistData.watchlistData} />
+        <TopMoversList coinData={topmoversData.topMovers} />
       </ScrollView>
     </SafeAreaView>
   );
