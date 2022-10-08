@@ -16,6 +16,7 @@ import * as watchlistActions from "../store/actions/watchlist";
 
 import WatchlistItem from "../components/WatchlistItem";
 import Watchlist from "../components/Watchlist";
+import { AnyAction } from "redux";
 
 interface RootState {
   watchlist: WatchlistState;
@@ -26,7 +27,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const loadData = () => {
     try {
-      dispatch(watchlistActions.fetchCoinData());
+      dispatch(watchlistActions.fetchCoinData() as unknown as AnyAction);
     } catch (err) {
       throw err;
     }
