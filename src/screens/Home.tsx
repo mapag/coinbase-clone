@@ -20,11 +20,12 @@ import * as watchlistActions from "../store/actions/watchlist";
 import * as topmoversActions from "../store/actions/topmovers";
 import * as newsActions from "../store/actions/news";
 
-import WatchlistItem from "../components/WatchlistItem";
 import Watchlist from "../components/Watchlist";
 import { AnyAction } from "redux";
-import TopMoversListItem from "../components/TopMoversListItem";
 import TopMoversList from "../components/TopMoversList";
+import NewsList from "../components/NewsList";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../navigation/AppNavigator";
 
 interface RootState {
   news: NewsState;
@@ -32,7 +33,16 @@ interface RootState {
   topmovers: TopMoversState;
 }
 
-const Home = () => {
+type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "HomeScreen"
+>;
+
+type Props = {
+  navigation: HomeScreenNavigationProp;
+};
+
+const Home = ({ navigation }: Props) => {
   const watchlistData = useSelector((state: RootState) => state.watchlist);
 
   const topmoversData = useSelector((state: RootState) => state.topmovers);
@@ -55,6 +65,10 @@ const Home = () => {
     loadData();
   }, []);
 
+  const viewMoreHandler = () => {
+    navigation.navigate("News");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -67,6 +81,11 @@ const Home = () => {
         <CoinbaseButton title="Get started" />
         <Watchlist coinData={watchlistData.watchlistData} />
         <TopMoversList coinData={topmoversData.topMovers} />
+        <NewsList
+          isHomeScreen={true}
+          viewMoreHandler={viewMoreHandler}
+          newsData={newsData.news}
+        />
       </ScrollView>
     </SafeAreaView>
   );
