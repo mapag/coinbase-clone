@@ -4,6 +4,8 @@ This is a clone of the Coinbase app. It is a simple app that allows you to see c
 
 It is built with React Native and Expo.
 
+![Coinbase App Gif](https://media0.giphy.com/media/otZgTATTPz13zf72Y7/giphy.gif?cid=790b761169b11cf0c0a4e11e14add68b2f852a98bd75ef15&rid=giphy.gif&ct=g)
+
 ## Installation
 
 Clone the repository and install the dependencies.
