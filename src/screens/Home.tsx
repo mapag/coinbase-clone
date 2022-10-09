@@ -12,11 +12,13 @@ import CoinbaseButton from "../components/CoinbaseButton";
 
 import { WatchlistState } from "../store/reducers/watchlist";
 import { TopMoversState } from "../store/reducers/topmovers";
+import { NewsState } from "../store/reducers/news";
 
 import { useSelector, useDispatch } from "react-redux";
 
 import * as watchlistActions from "../store/actions/watchlist";
 import * as topmoversActions from "../store/actions/topmovers";
+import * as newsActions from "../store/actions/news";
 
 import WatchlistItem from "../components/WatchlistItem";
 import Watchlist from "../components/Watchlist";
@@ -25,6 +27,7 @@ import TopMoversListItem from "../components/TopMoversListItem";
 import TopMoversList from "../components/TopMoversList";
 
 interface RootState {
+  news: NewsState;
   watchlist: WatchlistState;
   topmovers: TopMoversState;
 }
@@ -34,13 +37,15 @@ const Home = () => {
 
   const topmoversData = useSelector((state: RootState) => state.topmovers);
 
-  console.log(JSON.stringify(topmoversData));
+  const newsData = useSelector((state: RootState) => state.news);
 
+  console.log(newsData);
   const dispatch = useDispatch();
   const loadData = () => {
     try {
       dispatch(watchlistActions.fetchCoinData() as unknown as AnyAction);
       dispatch(topmoversActions.fetchTopMoversData() as unknown as AnyAction);
+      dispatch(newsActions.fetchNewsData() as unknown as AnyAction);
     } catch (err) {
       throw err;
     }
