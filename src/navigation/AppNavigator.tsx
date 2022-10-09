@@ -25,7 +25,7 @@ const HomeNavigator = () => {
       <HomeStackNavigator.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={HomeOptions}
+        options={{ headerShown: false }}
       />
       <HomeStackNavigator.Screen name="News" component={News} />
     </HomeStackNavigator.Navigator>

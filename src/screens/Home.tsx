@@ -49,7 +49,6 @@ const Home = ({ navigation }: Props) => {
 
   const newsData = useSelector((state: RootState) => state.news);
 
-  console.log(newsData);
   const dispatch = useDispatch();
   const loadData = () => {
     try {
